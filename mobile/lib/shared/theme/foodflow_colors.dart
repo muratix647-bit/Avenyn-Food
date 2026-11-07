@@ -24,7 +24,7 @@ class FoodFlowColors {
   static const Color neutral900 = Color(0xFF111827);
 
   // Semantic status
-  static const Color statusSuccess = Color(0xFF1665C1);
+  static const Color statusSuccess = Color(0xFF22C55E);
   static const Color statusWarning = Color(0xFFF59E0B);
   static const Color statusError = Color(0xFFEF4444);
   static const Color statusInfo = Color(0xFF3B82F6);
@@ -33,7 +33,7 @@ class FoodFlowColors {
   static const Color orderPending = Color(0xFFF59E0B);
   static const Color orderConfirmed = Color(0xFF3B82F6);
   static const Color orderPreparing = Color(0xFF8B5CF6);
-  static const Color orderDelivering = Color(0xFF1665C1);
-  static const Color orderDelivered = Color(0xFF0D4386);
+  static const Color orderDelivering = Color(0xFF22C55E);
+  static const Color orderDelivered = Color(0xFF16A34A);
   static const Color orderCancelled = Color(0xFFEF4444);
 }
