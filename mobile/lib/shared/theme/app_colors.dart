@@ -25,7 +25,7 @@ class AppColors {
   static const Color textOnPrimary = Color(0xFFFFFFFF);
 
   // Status
-  static const Color success = Color(0xFF1665C1);
+  static const Color success = Color(0xFF2ECC71);
   static const Color warning = Color(0xFFFFCC00);
   static const Color error = Color(0xFFE74C3C);
   static const Color info = Color(0xFF3498DB);
@@ -34,8 +34,8 @@ class AppColors {
   static const Color orderPending = Color(0xFFFFCC00);
   static const Color orderConfirmed = Color(0xFF3498DB);
   static const Color orderPreparing = Color(0xFF9B59B6);
-  static const Color orderDelivering = Color(0xFF1665C1);
-  static const Color orderDelivered = Color(0xFF0D4386);
+  static const Color orderDelivering = Color(0xFF2ECC71);
+  static const Color orderDelivered = Color(0xFF27AE60);
   static const Color orderCancelled = Color(0xFFE74C3C);
 
   // Borders
