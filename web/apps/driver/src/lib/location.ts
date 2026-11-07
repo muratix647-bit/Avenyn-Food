@@ -87,19 +87,19 @@ export function getCurrentLocation(options?: PositionOptions): Promise<GeoPositi
   );
 }
 
-/** Vietnam delivery bounds enforced by the backend; used for client pre-checks. */
-export const VIETNAM_DELIVERY_BOUNDS = {
-  minLat: 8.0,
-  maxLat: 23.5,
-  minLng: 102.0,
-  maxLng: 110.0,
+/** Avenyn Food initial Göteborg-area pilot. Real coverage should later use zones. */
+export const AVENYN_FOOD_DELIVERY_BOUNDS = {
+  minLat: 57.15,
+  maxLat: 58.3,
+  minLng: 11.0,
+  maxLng: 13.0,
 } as const;
 
-export function isWithinVietnamBounds(lat: number, lng: number): boolean {
-  return (
-    lat >= VIETNAM_DELIVERY_BOUNDS.minLat &&
-    lat <= VIETNAM_DELIVERY_BOUNDS.maxLat &&
-    lng >= VIETNAM_DELIVERY_BOUNDS.minLng &&
-    lng <= VIETNAM_DELIVERY_BOUNDS.maxLng
-  );
+export function isWithinAvenynFoodDeliveryArea(lat: number, lng: number): boolean {
+  return Number.isFinite(lat) && Number.isFinite(lng) &&
+    lat >= AVENYN_FOOD_DELIVERY_BOUNDS.minLat &&
+    lat <= AVENYN_FOOD_DELIVERY_BOUNDS.maxLat &&
+    lng >= AVENYN_FOOD_DELIVERY_BOUNDS.minLng &&
+    lng <= AVENYN_FOOD_DELIVERY_BOUNDS.maxLng &&
+    !(lat === 0 && lng === 0);
 }

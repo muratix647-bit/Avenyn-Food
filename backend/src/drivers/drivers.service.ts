@@ -2,7 +2,7 @@ import { Injectable, Inject, BadRequestException, NotFoundException } from '@nes
 import { Prisma } from '@prisma/client'
 import { PrismaService } from '../database/prisma.service'
 import { decodePolyline } from '../common/utils/route.utils'
-import { isWithinVietnamDeliveryBounds } from '../common/utils/delivery-area.utils'
+import { isWithinAvenynFoodDeliveryArea } from '../common/utils/delivery-area.utils'
 import { haversineDistance } from '../common/utils/geo.utils'
 import { routePhaseForStatus, routeResultFromPersistedPhase, type DeliveryRoutePhase } from '../tracking/tracking.service'
 import Redis from 'ioredis'
@@ -202,7 +202,7 @@ export class DriversService {
     sampledAt: string,
     accuracy?: number,
   ): Promise<{ isOnline: true; lat: number; lng: number }> {
-    if (!isWithinVietnamDeliveryBounds(lat, lng)) {
+    if (!isWithinAvenynFoodDeliveryArea(lat, lng)) {
       throw new BadRequestException('LOCATION_OUT_OF_DELIVERY_AREA')
     }
     if (

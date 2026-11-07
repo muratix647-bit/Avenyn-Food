@@ -5,8 +5,8 @@ import { AuthProvider } from '@/lib/auth-provider';
 import { LanguageProvider } from '@/lib/language-context';
 
 export const metadata: Metadata = {
-  title: { template: '%s | FoodFlow Driver', default: 'FoodFlow Driver — Ứng dụng Tài xế' },
-  description: 'Nhận đơn và giao hàng cùng FoodFlow.',
+  title: { template: '%s | Avenyn Food Bud', default: 'Avenyn Food Bud — Leveranser' },
+  description: 'Ta emot och leverera beställningar med Avenyn Food.',
   manifest: '/site.webmanifest',
   icons: {
     icon: [
@@ -17,14 +17,14 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#1e293b',
+  themeColor: '#1665c1',
   width: 'device-width',
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="vi">
+    <html lang="sv">
       <body className="font-sans">
         <LanguageProvider>
           <AuthProvider>{children}</AuthProvider>

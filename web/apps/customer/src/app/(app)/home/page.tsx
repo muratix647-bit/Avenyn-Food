@@ -22,7 +22,9 @@ const CUISINES = [
   'Fast Food',
 ];
 
-const DEFAULT_COORDS = { lat: 10.7769, lng: 106.7009 };
+// Göteborg city centre is used only to discover nearby restaurants if location permission is unavailable.
+// Never present these coordinates as the customer's actual position.
+const DEFAULT_COORDS = { lat: 57.7089, lng: 11.9746 };
 const PAGE_SIZE = 12;
 
 export default function HomePage() {
@@ -128,11 +130,11 @@ export default function HomePage() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={t('home.searchPlaceholder')}
-            aria-label="Search restaurants or dishes"
+            aria-label={t('home.searchPlaceholder')}
             className="input-field pl-9"
           />
         </label>
-        <Button type="submit" variant="outline" aria-label="Search">
+        <Button type="submit" variant="outline" aria-label={t('home.searchBtn')}>
           {t('home.searchBtn')}
         </Button>
         <Button
@@ -140,7 +142,7 @@ export default function HomePage() {
           variant={usingLocation ? 'default' : 'outline'}
           onClick={usingLocation ? () => setLocation({ status: 'idle' }) : requestLocation}
           aria-pressed={usingLocation}
-          aria-label="Use my location"
+          aria-label={t('home.useLocation')}
           className="gap-1.5"
         >
           {location.status === 'requesting' ? (
@@ -160,7 +162,7 @@ export default function HomePage() {
         </p>
       )}
 
-      <div className="-mx-4 overflow-x-auto px-4 scrollbar-thin" role="group" aria-label="Cuisine">
+      <div className="-mx-4 overflow-x-auto px-4 scrollbar-thin" role="group" aria-label={t('home.allCuisines')}>
         <div className="flex gap-2 pb-1">
           <Badge
             variant={cuisine === null ? 'default' : 'outline'}

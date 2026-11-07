@@ -4,14 +4,14 @@ class AppColors {
   AppColors._();
 
   // Primary
-  static const Color primary = Color(0xFF2ECC71);
-  static const Color primaryDark = Color(0xFF27AE60);
-  static const Color primaryLight = Color(0xFFA8E6CF);
+  static const Color primary = Color(0xFF1665C1);
+  static const Color primaryDark = Color(0xFF0D4386);
+  static const Color primaryLight = Color(0xFFDDEEFF);
 
   // Accent
-  static const Color accent = Color(0xFFF39C12);
-  static const Color accentDark = Color(0xFFE67E22);
-  static const Color accentLight = Color(0xFFFDEBD0);
+  static const Color accent = Color(0xFFFFCC00);
+  static const Color accentDark = Color(0xFFE3AF00);
+  static const Color accentLight = Color(0xFFFFF4C0);
 
   // Backgrounds
   static const Color background = Color(0xFFFFFFFF);
@@ -26,12 +26,12 @@ class AppColors {
 
   // Status
   static const Color success = Color(0xFF2ECC71);
-  static const Color warning = Color(0xFFF39C12);
+  static const Color warning = Color(0xFFFFCC00);
   static const Color error = Color(0xFFE74C3C);
   static const Color info = Color(0xFF3498DB);
 
   // Order status
-  static const Color orderPending = Color(0xFFF39C12);
+  static const Color orderPending = Color(0xFFFFCC00);
   static const Color orderConfirmed = Color(0xFF3498DB);
   static const Color orderPreparing = Color(0xFF9B59B6);
   static const Color orderDelivering = Color(0xFF2ECC71);

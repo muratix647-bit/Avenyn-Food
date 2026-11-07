@@ -2,8 +2,8 @@ import { goOnlineSchema } from './drivers.zod'
 
 describe('goOnlineSchema', () => {
   const baseSample = {
-    lat: 10.7769,
-    lng: 106.7009,
+    lat: 57.7089,
+    lng: 11.9746,
     sampledAt: '2026-07-15T08:00:00.000Z',
   }
 

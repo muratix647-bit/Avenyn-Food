@@ -6,8 +6,8 @@ import { CartProvider } from '@/lib/cart-store';
 import { LanguageProvider } from '@/lib/language-context';
 
 export const metadata: Metadata = {
-  title: { template: '%s | FoodFlow', default: 'FoodFlow — Đặt đồ ăn giao nhanh' },
-  description: 'Đặt món ăn từ các nhà hàng uy tín gần bạn, giao tận nơi nóng hổi.',
+  title: { template: '%s | Avenyn Food', default: 'Avenyn Food — Beställ mat i Göteborg' },
+  description: 'Beställ mat från lokala restauranger i Göteborg med Avenyn Food.',
   manifest: '/site.webmanifest',
   icons: {
     icon: [
@@ -18,14 +18,14 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#ea580c',
+  themeColor: '#1665c1',
   width: 'device-width',
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="vi">
+    <html lang="sv">
       <body className="font-sans">
         <LanguageProvider>
           <AuthProvider>

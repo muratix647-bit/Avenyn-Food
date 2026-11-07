@@ -8,10 +8,10 @@ import { resolveAdminMetadataBase } from '@/lib/metadata-url';
 export const metadata: Metadata = {
   metadataBase: resolveAdminMetadataBase(),
   title: {
-    template: '%s | FoodFlow Admin',
-    default: 'FoodFlow Admin',
+    template: '%s | Avenyn Food Admin',
+    default: 'Avenyn Food Admin',
   },
-  description: 'FoodFlow delivery operations console for orders, restaurants, drivers, and users',
+  description: 'Avenyn Food administration för beställningar, restauranger och bud',
   manifest: '/site.webmanifest',
   icons: {
     icon: [
@@ -20,12 +20,12 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: 'FoodFlow Admin',
-    description: 'FoodFlow delivery operations console',
+    title: 'Avenyn Food Admin',
+    description: 'Avenyn Food trafikledning och leveranser',
     type: 'website',
-    images: [{ url: '/foodflow-mark.svg', width: 512, height: 512, alt: 'FoodFlow Admin mark' }],
+    images: [{ url: '/foodflow-mark.svg', width: 512, height: 512, alt: 'Avenyn Food Admin mark' }],
   },
-  twitter: { card: 'summary', title: 'FoodFlow Admin', images: ['/foodflow-mark.svg'] },
+  twitter: { card: 'summary', title: 'Avenyn Food Admin', images: ['/foodflow-mark.svg'] },
   robots: { index: false, follow: false },
 };
 

@@ -36,7 +36,7 @@ android {
         targetSdk = 36
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-        manifestPlaceholders["APP_LABEL"] = "FoodFlow"
+        manifestPlaceholders["APP_LABEL"] = "Avenyn Food"
         manifestPlaceholders["GOOGLE_MAPS_API_KEY"] =
             stringPropertyOrEnv("GOOGLE_MAPS_API_KEY")
                 ?: ""
@@ -47,12 +47,12 @@ android {
         create("customer") {
             dimension = "app"
             applicationId = "vn.foodflow.customer"
-            manifestPlaceholders["APP_LABEL"] = "FoodFlow"
+            manifestPlaceholders["APP_LABEL"] = "Avenyn Food"
         }
         create("driver") {
             dimension = "app"
             applicationId = "vn.foodflow.driver"
-            manifestPlaceholders["APP_LABEL"] = "FoodFlow Driver"
+            manifestPlaceholders["APP_LABEL"] = "Avenyn Food Bud"
         }
     }
 

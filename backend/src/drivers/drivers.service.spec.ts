@@ -56,7 +56,7 @@ describe('DriversService', () => {
   })
 
   describe('goOnline', () => {
-    it('rejects driver online coordinates outside the Vietnam delivery bounds', async () => {
+    it('rejects driver online coordinates outside the Göteborg pilot delivery bounds', async () => {
       await expect(
         service.goOnline('d1', 13.7563, 100.5018, new Date().toISOString()),
       ).rejects.toThrow(
@@ -70,7 +70,7 @@ describe('DriversService', () => {
       const staleSampledAt = new Date(Date.now() - 60_000).toISOString()
 
       await expect(
-        service.goOnline('d1', 10.8, 106.7, staleSampledAt),
+        service.goOnline('d1', 57.7089, 11.9746, staleSampledAt),
       ).rejects.toThrow(new BadRequestException('STALE_DRIVER_LOCATION_TIMESTAMP'))
       expect(mockPrisma.driverProfile.findUniqueOrThrow).not.toHaveBeenCalled()
       expect(mockRedis.eval).not.toHaveBeenCalled()
@@ -78,7 +78,7 @@ describe('DriversService', () => {
 
     it('rejects malformed online coordinate timestamps before writing live Redis state', async () => {
       await expect(
-        service.goOnline('d1', 10.8, 106.7, 'not-a-date'),
+        service.goOnline('d1', 57.7089, 11.9746, 'not-a-date'),
       ).rejects.toThrow(new BadRequestException('INVALID_DRIVER_LOCATION_TIMESTAMP'))
       expect(mockPrisma.driverProfile.findUniqueOrThrow).not.toHaveBeenCalled()
       expect(mockRedis.eval).not.toHaveBeenCalled()
@@ -86,7 +86,7 @@ describe('DriversService', () => {
 
     it('rejects poor-accuracy online samples before writing live Redis state', async () => {
       await expect(
-        service.goOnline('d1', 10.8, 106.7, new Date().toISOString(), 50.1),
+        service.goOnline('d1', 57.7089, 11.9746, new Date().toISOString(), 50.1),
       ).rejects.toThrow(new BadRequestException('POOR_DRIVER_LOCATION_ACCURACY'))
       expect(mockPrisma.driverProfile.findUniqueOrThrow).not.toHaveBeenCalled()
       expect(mockRedis.eval).not.toHaveBeenCalled()
@@ -99,7 +99,7 @@ describe('DriversService', () => {
         totalDeliveries: 0,
       })
       await expect(
-        service.goOnline('d1', 10.8, 106.7, new Date().toISOString()),
+        service.goOnline('d1', 57.7089, 11.9746, new Date().toISOString()),
       ).rejects.toThrow(BadRequestException)
     })
 
@@ -111,10 +111,10 @@ describe('DriversService', () => {
         totalDeliveries: 37,
       })
       mockPrisma.driverProfile.update.mockResolvedValueOnce({})
-      await expect(service.goOnline('d1', 10.8, 106.7, sampledAt)).resolves.toEqual({
+      await expect(service.goOnline('d1', 57.7089, 11.9746, sampledAt)).resolves.toEqual({
         isOnline: true,
-        lat: 10.8,
-        lng: 106.7,
+        lat: 57.7089,
+        lng: 11.9746,
       })
       expect(mockRedis.eval).toHaveBeenCalledWith(
         expect.stringContaining("redis.call('GEOADD', KEYS[1]"),
@@ -127,8 +127,8 @@ describe('DriversService', () => {
         'driver:d1:total_deliveries',
         'driver:d1:idle_since',
         'driver:d1:current_order',
-        '106.7',
-        '10.8',
+        '11.9746',
+        '57.7089',
         'driver:d1',
         'online',
         '35',
@@ -149,7 +149,7 @@ describe('DriversService', () => {
       mockPrisma.order.findFirst.mockResolvedValueOnce({ id: 'order-active' })
       mockPrisma.driverProfile.update.mockResolvedValueOnce({})
 
-      await service.goOnline('d1', 10.8, 106.7, new Date().toISOString(), 5)
+      await service.goOnline('d1', 57.7089, 11.9746, new Date().toISOString(), 5)
 
       expect(mockRedis.eval).toHaveBeenCalledWith(
         expect.any(String),
@@ -185,13 +185,13 @@ describe('DriversService', () => {
       mockRedis.eval.mockRejectedValueOnce(new Error('Redis unavailable'))
 
       await expect(
-        service.goOnline('d1', 10.8, 106.7, new Date().toISOString(), 5),
+        service.goOnline('d1', 57.7089, 11.9746, new Date().toISOString(), 5),
       ).rejects.toThrow('Redis unavailable')
 
       expect(mockRedis.eval).toHaveBeenCalledTimes(2)
       expect(mockPrisma.driverProfile.update).toHaveBeenNthCalledWith(1, {
         where: { userId: 'd1' },
-        data: { isOnline: true, currentLat: 10.8, currentLng: 106.7 },
+        data: { isOnline: true, currentLat: 57.7089, currentLng: 11.9746 },
       })
       expect(mockPrisma.driverProfile.update).toHaveBeenNthCalledWith(2, {
         where: { userId: 'd1' },
