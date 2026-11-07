@@ -8,8 +8,9 @@ import {
   useState,
   type ReactNode,
 } from 'react';
+import { svTranslations } from './translations-sv';
 
-export type Locale = 'vi' | 'en' | 'ja';
+export type Locale = 'sv' | 'vi' | 'en' | 'ja';
 
 export interface LanguageContextType {
   locale: Locale;
@@ -18,21 +19,25 @@ export interface LanguageContextType {
   t: (key: string, params?: Record<string, string | number>) => string;
 }
 
-const STORAGE_KEY = 'foodflow_locale';
+const STORAGE_KEY = 'avenyn_food_locale';
+const LEGACY_STORAGE_KEY = 'foodflow_locale';
 
 const LOCALE_CYCLE: Record<Locale, Locale> = {
-  vi: 'en',
-  en: 'ja',
-  ja: 'vi',
+  sv: 'en',
+  en: 'vi',
+  vi: 'ja',
+  ja: 'sv',
 };
 
 export const LOCALE_META: Record<Locale, { flag: string; label: string; code: string }> = {
+  sv: { flag: '🇸🇪', label: 'Svenska', code: 'SV' },
   vi: { flag: '🇻🇳', label: 'Tiếng Việt', code: 'VI' },
   en: { flag: '🇬🇧', label: 'English', code: 'EN' },
   ja: { flag: '🇯🇵', label: '日本語', code: 'JA' },
 };
 
 const translations: Record<Locale, Record<string, string>> = {
+  sv: svTranslations,
   vi: {
     // Nav
     'nav.discover': 'Khám phá',
@@ -477,19 +482,19 @@ const translations: Record<Locale, Record<string, string>> = {
 };
 
 const LanguageContext = createContext<LanguageContextType>({
-  locale: 'vi',
+  locale: 'sv',
   setLocale: () => {},
   toggleLocale: () => {},
   t: (k) => k,
 });
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>('vi');
+  const [locale, setLocaleState] = useState<Locale>('sv');
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved === 'en' || saved === 'vi' || saved === 'ja') {
+      const saved = localStorage.getItem(STORAGE_KEY) ?? localStorage.getItem(LEGACY_STORAGE_KEY);
+      if (saved === 'sv' || saved === 'en' || saved === 'vi' || saved === 'ja') {
         setLocaleState(saved);
       }
     } catch {
@@ -509,7 +514,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const toggleLocale = useCallback(() => {
     setLocaleState((prev) => {
-      const next = LOCALE_CYCLE[prev] ?? 'vi';
+      const next = LOCALE_CYCLE[prev] ?? 'sv';
       try {
         localStorage.setItem(STORAGE_KEY, next);
         document.documentElement.lang = next;
@@ -548,8 +553,8 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   const { locale, setLocale } = useLanguage();
 
   return (
-    <div className={`inline-flex items-center rounded-full border border-orange-200 bg-white/95 p-0.5 shadow-xs ${className ?? ''}`}>
-      {(['vi', 'en', 'ja'] as const).map((code) => {
+    <div className={`inline-flex items-center rounded-full border border-blue-200 bg-white/95 p-0.5 shadow-xs ${className ?? ''}`}>
+      {(['sv', 'en', 'vi', 'ja'] as const).map((code) => {
         const active = locale === code;
         const meta = LOCALE_META[code];
         return (
@@ -560,8 +565,8 @@ export function LanguageSwitcher({ className }: { className?: string }) {
             aria-label={`Switch to ${meta.label}`}
             className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium transition ${
               active
-                ? 'bg-orange-500 text-white shadow-xs font-semibold'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-orange-50'
+                ? 'bg-blue-600 text-white shadow-xs font-semibold'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-blue-50'
             }`}
           >
             <span className="text-xs leading-none">{meta.flag}</span>
