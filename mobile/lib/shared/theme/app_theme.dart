@@ -17,7 +17,7 @@ class AppTheme {
         surface: AppColors.surface,
         error: AppColors.error,
         onPrimary: AppColors.textOnPrimary,
-        onSecondary: AppColors.textOnPrimary,
+        onSecondary: AppColors.textPrimary,
         onSurface: AppColors.textPrimary,
       ),
       fontFamily: 'Inter',
