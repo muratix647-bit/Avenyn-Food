@@ -54,3 +54,23 @@ Bjud in **5–10 restauranger i Göteborg** och börja med avhämtning samt rest
 ## Notering
 
 Ingen produktionsmiljö, betalning eller appbutiksinlämning görs som del av denna inledande varumärkesändring.
+
+
+## Genomfört i nästa utvecklingssteg (2026-11-07)
+
+- Svenskt standardspråk i **webbkund** (122 översättningsnycklar) och **webbbud** (57 nycklar), med bevarade språkval.
+- Svenska som HTML-språk och svenska datumformat i dessa två webbroller.
+- Göteborg som neutral startpunkt för restaurangsökning om platsåtkomst saknas. Det är **inte** kundens faktiska GPS-position.
+- Separat, inledande geografisk avgränsning för Göteborg i backend och webbbudets GPS-validering. Riktiga leveranszoner måste införas innan lansering.
+- Tog bort farligt demo-beteende där webbbudappen skickade falska vietnamesiska GPS-koordinater om platstjänster saknades.
+- Introducerat en separat `formatSek` för belopp som redan är SEK. Legacy `formatVnd` är kvar tills lagrade priser, orderlogik, avgifter och betalningar har migrerats på riktigt.
+- Nya regressionstester för geografiska gränser och formatering har lagts till, **men inga tester har körts i denna session**.
+
+### Öppet och viktigt
+
+- Admin/Restaurang och mobilapparna är **inte** färdigöversatta till svenska. Flera hårdkodade demo-texter kan återstå även i webbapparna.
+- Mobilapparnas kartor och landgränser kan fortfarande ha Vietnam-inställningar.
+- Backend/prismodell är i delar fortfarande anpassad för Vietnam: `VND` förekommer som standardvärde i Prisma och SePay finns som betalning. Det är inte tillåtet att bara byta valutatecken till "kr" utan en riktig migrering och test av lagrade värden.
+- Grundvärde 15 % finns redan i `backend/src/payments/commission.service.ts`; korrekt moms, avtalsmässig provisionsbas, verklig utbetalning, refunderingar och Stripe Connect ska verifieras separat.
+- Inga ändringar är ännu sammanförda med `master` eller publicerade till någon appbutik.
+
