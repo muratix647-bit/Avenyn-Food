@@ -26,7 +26,7 @@ import {
 import { driverStatusLabel, isActiveDriverStatus, nextDriverActionLabel, nextDriverStatus } from '@/lib/driver-status';
 import { formatVnd } from '@/lib/format';
 import { useLanguage } from '@/lib/language-context';
-import { getCurrentLocation, isWithinVietnamBounds, type GeoPosition, type LocationState } from '@/lib/location';
+import { getCurrentLocation, isWithinAvenynFoodDeliveryArea, type LocationState } from '@/lib/location';
 import { subscribeDriverDispatch, type ConnectionState } from '@/lib/realtime';
 import { useLocationTracker } from '@/lib/use-location-tracker';
 import type { DriverOrder } from '@/lib/types';
@@ -35,13 +35,6 @@ import { OfferCard } from '@/components/offer-card';
 import { TrackingMap } from '@/components/tracking-map';
 
 const POLL_MS = 20_000;
-
-const DEFAULT_DEMO_COORDS: GeoPosition = {
-  lat: 10.7769,
-  lng: 106.7009,
-  accuracy: 10,
-  timestamp: 0,
-};
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -137,14 +130,15 @@ export default function DashboardPage() {
     setActionError(null);
     setLocationState({ status: 'requesting' });
     try {
-      let position: GeoPosition;
-      try {
-        position = await getCurrentLocation({ timeout: 4000 });
-        if (!isWithinVietnamBounds(position.lat, position.lng)) {
-          position = { ...DEFAULT_DEMO_COORDS, timestamp: Date.now() };
-        }
-      } catch {
-        position = { ...DEFAULT_DEMO_COORDS, timestamp: Date.now() };
+      // Never report a fake location when GPS fails or is outside the pilot area.
+      // The backend independently validates these coordinates.
+      const position = await getCurrentLocation({ timeout: 10000 }).catch((state: LocationState) => {
+        setLocationState(state);
+        throw new Error('GPS_REQUIRED');
+      });
+      if (!isWithinAvenynFoodDeliveryArea(position.lat, position.lng)) {
+        setLocationState({ status: 'unavailable' });
+        throw new Error('LOCATION_OUT_OF_DELIVERY_AREA');
       }
 
       setLocationState({
@@ -157,7 +151,11 @@ export default function DashboardPage() {
       setOnline(true);
     } catch (err) {
       const apiError = err as ApiClientError;
-      if (apiError?.code === 'DRIVER_NOT_VERIFIED') {
+      if ((err as Error)?.message === 'GPS_REQUIRED') {
+        setActionError('Din riktiga GPS-position krävs för att gå online. Aktivera platstjänster och försök igen.');
+      } else if ((err as Error)?.message === 'LOCATION_OUT_OF_DELIVERY_AREA') {
+        setActionError('Du befinner dig utanför Avenyn Foods aktuella leveransområde i Göteborg.');
+      } else if (apiError?.code === 'DRIVER_NOT_VERIFIED') {
         setActionError(locale === 'vi' ? 'Tài khoản tài xế chưa được kích hoạt.' : 'Your driver account is not verified yet.');
       } else if (apiError?.code === 'LOCATION_OUT_OF_DELIVERY_AREA') {
         setActionError(locale === 'vi' ? 'Bạn đang ở ngoài khu vực giao hàng.' : 'You are outside the delivery area.');
