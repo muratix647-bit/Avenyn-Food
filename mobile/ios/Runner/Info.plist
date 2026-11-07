@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>FoodFlow</string>
+	<string>Avenyn Food</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>FoodFlow</string>
+	<string>Avenyn Food</string>
 	<key>GoogleMapsApiKey</key>
 	<string>$(GOOGLE_MAPS_API_KEY)</string>
 	<key>CFBundlePackageType</key>
@@ -59,13 +59,13 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>NSCameraUsageDescription</key>
-	<string>FoodFlow uses the camera only when you choose to upload profile, KYC, or delivery proof photos.</string>
+	<string>Avenyn Food använder the camera kameran endast när du själv laddar upp profilbilder, identitetshandlingar eller leveransbevis.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>FoodFlow uses driver location in the background to update delivery progress while an order is active.</string>
+	<string>Avenyn Food använder budets plats i bakgrunden för att uppdatera leveransens status under en aktiv beställning.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>FoodFlow uses your location to find nearby restaurants and show delivery routes.</string>
+	<string>Avenyn Food använder din plats för att visa restauranger i närheten och leveransvägar.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>FoodFlow uses your photo library only when you choose an image to upload.</string>
+	<string>Avenyn Food använder ditt bildbibliotek endast när du själv väljer en bild att ladda upp.</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UISupportedInterfaceOrientations</key>
