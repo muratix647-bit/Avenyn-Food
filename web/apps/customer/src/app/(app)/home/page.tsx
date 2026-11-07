@@ -22,7 +22,9 @@ const CUISINES = [
   'Fast Food',
 ];
 
-const DEFAULT_COORDS = { lat: 10.7769, lng: 106.7009 };
+// Göteborg city centre is used only to discover nearby restaurants if location permission is unavailable.
+// Never present these coordinates as the customer's actual position.
+const DEFAULT_COORDS = { lat: 57.7089, lng: 11.9746 };
 const PAGE_SIZE = 12;
 
 export default function HomePage() {
