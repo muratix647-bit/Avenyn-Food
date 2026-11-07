@@ -8,10 +8,10 @@ import { resolveRestaurantMetadataBase } from '@/lib/metadata-url'
 export const metadata: Metadata = {
   metadataBase: resolveRestaurantMetadataBase(),
   title: {
-    template: '%s | FoodFlow Restaurant',
-    default: 'FoodFlow Restaurant',
+    template: '%s | Avenyn Food Restaurang',
+    default: 'Avenyn Food Restaurang',
   },
-  description: 'FoodFlow merchant workspace for orders, menu, promotions, revenue, staff, insights, and customer replies',
+  description: 'Avenyn Food restaurangportal för beställningar, menyer och försäljning',
   manifest: '/site.webmanifest',
   icons: {
     icon: [
@@ -20,12 +20,12 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: 'FoodFlow Restaurant',
-    description: 'FoodFlow merchant workspace',
+    title: 'Avenyn Food Restaurang',
+    description: 'Avenyn Food restaurangportal',
     type: 'website',
-    images: [{ url: '/foodflow-mark.svg', width: 512, height: 512, alt: 'FoodFlow Restaurant mark' }],
+    images: [{ url: '/foodflow-mark.svg', width: 512, height: 512, alt: 'Avenyn Food Restaurang mark' }],
   },
-  twitter: { card: 'summary', title: 'FoodFlow Restaurant', images: ['/foodflow-mark.svg'] },
+  twitter: { card: 'summary', title: 'Avenyn Food Restaurang', images: ['/foodflow-mark.svg'] },
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
