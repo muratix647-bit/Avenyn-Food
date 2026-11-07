@@ -496,6 +496,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       const saved = localStorage.getItem(STORAGE_KEY) ?? localStorage.getItem(LEGACY_STORAGE_KEY);
       if (saved === 'sv' || saved === 'en' || saved === 'vi' || saved === 'ja') {
         setLocaleState(saved);
+        document.documentElement.lang = saved;
       }
     } catch {
       // LocalStorage access may be restricted
